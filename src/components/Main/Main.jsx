@@ -1,7 +1,6 @@
 import React from "react"
 
 function Main() {
-    //const ingredients = ["Chicken","Oregano","Tomatoes"]
     const [ingredients, setIngredients] = React.useState([])
     
     const ingredientsList = ingredients.map(
@@ -10,9 +9,7 @@ function Main() {
         )
     )
 
-    function handleSubmit(event) {
-        event.preventDefault()
-        const formData = new FormData(event.currentTarget)
+    function addIngredient(formData) {
         const newIngredient = formData.get("ingredient")
         setIngredients(
             prevIngredients => [
@@ -20,13 +17,11 @@ function Main() {
                 newIngredient
             ]
         )
-        event.currentTarget.reset()
-        console.log(ingredients)
     }
 
     return (
         <main>
-            <form onSubmit={handleSubmit} className="add-ingredient-form">
+            <form action={addIngredient} className="add-ingredient-form">
                 <input
                     type="text"
                     placeholder="e.g. oregano" 
